@@ -1,0 +1,1278 @@
+{
+	"info": {
+		"_postman_id": "ae22688b-3fcd-48f0-8dd4-002ce83dc40d",
+		"name": "Asset Management Sprint 3",
+		"description": "# **DESCRIPTION**\n\nThis is API for sprint 2:\n\n- From previous sprints\n    - Login Account\n    - Manage User\n- Manage asset:\n    - Get asset list\n    - Get asset by asset code\n    - Create asset\n    - Update asset\n    - Delete asset\n    - Create Category",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24522066"
+	},
+	"item": [
+		{
+			"name": "Manage user",
+			"item": [
+				{
+					"name": "Create user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Vang\",\r\n    \"lastName\": \"Do Van\",\r\n    \"dob\": \"2022-11-18\",\r\n    \"joinedDate\": \"2022-11-18\",\r\n    \"gender\": \"FEMALE\",\r\n    \"type\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"users"
+							]
+						},
+						"description": "# NOTE\n\n**Only ADMIN is allowed.**\n\n**Required user to login** to create user.\n\nGet token by logging into system and put it in **Authorization** header"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"users"
+							]
+						},
+						"description": "# **NOTE**\n\n**Only ADMIN is allowed.**\n\n**Required user to login** to get all users.\n\nGet token by logging into system and put it in **Authorization** header"
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by username",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/users/:username",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"users",
+								":username"
+							],
+							"variable": [
+								{
+									"key": "username",
+									"value": ""
+								}
+							]
+						},
+						"description": "# **NOTE**\n\n**Only ADMIN is allowed.**\n\n**Required user to login** to get user by username.\n\nGet token by logging into system and put it in **Authorization** header"
+					},
+					"response": []
+				},
+				{
+					"name": "Get list of users with given filter",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/users?page=&search=&type=&sort=&status=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "",
+									"description": "0"
+								},
+								{
+									"key": "search",
+									"value": ""
+								},
+								{
+									"key": "type",
+									"value": ""
+								},
+								{
+									"key": "sort",
+									"value": "",
+									"description": "joinedDate,desc"
+								},
+								{
+									"key": "status",
+									"value": "true",
+									"description": "true"
+								}
+							]
+						},
+						"description": "# **NOTE**\n\n**Only ADMIN is allowed.**\n\n**Required user to login** to view user list.\n\nGet token by logging into system and put it in **Authorization** header\n\n---\n\n# DESCRIPTION\n\nGet list of users with given filters:\n\n- page: page index\n- search: keywords that matches staffCode or name\n- type: filter by user type (ADMIN or STAFF or leave it blank)\n- sort: all column titles by ascending/descending. We can sort multiple field using multiple sort parameters."
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Vang\",\r\n  \"lastName\": \"Do\",\r\n  \"dob\": \"2022-11-17\",\r\n  \"joinedDate\": \"2022-11-17\",\r\n  \"gender\": \"MALE\",\r\n  \"type\": \"STAFF\",\r\n  \"staffCode\": \"SD0009\",\r\n  \"status\": true,\r\n  \"location\": {\r\n      \"id\": \"HN\",\r\n      \"name\": \"Hanoi\"\r\n  },\r\n  \"createdBy\": \"vangdo\",\r\n  \"createdDate\": \"2022-11-23T20:12:23.966\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/users/:username",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"users",
+								":username"
+							],
+							"variable": [
+								{
+									"key": "username",
+									"value": "vangdv"
+								}
+							]
+						},
+						"description": "# **NOTE**\n\n**Only ADMIN is allowed.**\n\n**Required user to login** to update user.\n\nGet token by logging into system and put it in **Authorization** header"
+					},
+					"response": []
+				},
+				{
+					"name": "Disable user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/users/:username/disable",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"users",
+								":username",
+								"disable"
+							],
+							"variable": [
+								{
+									"key": "username",
+									"value": "tungnc"
+								}
+							]
+						},
+						"description": "# **Note**\n\n**Only ADMIN is allowed.**\n\n**Required user to login** to disable user.\n\nGet token by logging into system and put it in **Authorization** header"
+					},
+					"response": []
+				},
+				{
+					"name": "Change user's password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/users/password?password=12345678",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"users",
+								"password"
+							],
+							"query": [
+								{
+									"key": "password",
+									"value": "12345678"
+								},
+								{
+									"key": "oldPassword",
+									"value": "87654321",
+									"disabled": true
+								}
+							]
+						},
+						"description": "# **NOTE**\n\nRequired user login to change password.\n\nGet token by logging into system and put it in **Authorization** header\n\n---\n\n# DESCRIPTION\n\nWe can use this API to change password for the first time login and change password normally.\n\n- For the first time login: user is only required to input new password (\"**password**\" param)\n- For the normal change password: user is required to input both the old password and the new one.  \n    (\"**password**\" and \"**oldPassword**\" params)\n    \n\n###### (BE will get the current username after login then we don't need to parse username into path variable.)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Log in/out",
+			"item": [
+				{
+					"name": "Logs user into the system",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"vangdo\",\r\n    \"password\": \"matma123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"auth",
+								"login"
+							]
+						},
+						"description": "# DESCRIPTION\n\nUser can get bearer token to get access to other API.\n\n---\n\nReturn object includes:\n\n- \"token\"\n- \"refreshToken\"\n- \"type\": \"Bearer\"\n- \"username\"\n- \"role\": \"ADMIN\"\n- \"isFirstTimeLogin\": false"
+					},
+					"response": []
+				},
+				{
+					"name": "Get refresh token when token is expired",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"7569e94a-3328-4c22-a57c-1586e2823c53\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/auth/refreshToken",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"auth",
+								"refreshToken"
+							]
+						},
+						"description": "# **NOTE**\n\nRequired user token is expired to get refresh token.\n\n---\n\nReturn object:\n\n- \"accessToken\": \"\",\n- \"refreshToken\": \"\",\n- \"tokenType\": \"Bearer\""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Manage asset",
+			"item": [
+				{
+					"name": "Get list of assets with given filter",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkdWNiMSIsImlhdCI6MTY3MDA1ODczNiwiZXhwIjoxNjcwMDYwNTM2fQ.Q1wW2M1SocEsba40xgfYPubfBqiuhPrcO_laYNzq-amayLf6GNQCa5EoJMtPEUSnR40KKtaXU4DpaGEptTEnag",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/assets?page=0&search=&category=&sort=&state=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"assets"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"description": "0"
+								},
+								{
+									"key": "search",
+									"value": "",
+									"description": "LA000001"
+								},
+								{
+									"key": "category",
+									"value": "",
+									"description": "Laptop"
+								},
+								{
+									"key": "sort",
+									"value": "",
+									"description": "code,asc"
+								},
+								{
+									"key": "sort",
+									"value": "",
+									"description": "name,desc",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "",
+									"description": "category,asc",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "",
+									"description": "state,desc",
+									"disabled": true
+								},
+								{
+									"key": "state",
+									"value": "",
+									"description": "Not Available"
+								}
+							]
+						},
+						"description": "# **NOTE**\n\n**Only ADMIN is allowed**\n\n**Required user to login** to view asset list.\n\nGet token by logging into system and put it in **Authorization** header\n\n---\n\n# DESCRIPTION\n\nGet list of users with given filters:\n\n- **page**: page index\n- **search**: keywords that matches assetCode or name\n- **category**: filter by category\n- **state**: filter by 5 states - Available, Not Available, Assigned, Waiting for recycling, Recycled\n- **sort**: all column titles by ascending/descending. We can sort multiple field using multiple sort parameters."
+					},
+					"response": []
+				},
+				{
+					"name": "Get all assets",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/assets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"assets"
+							]
+						},
+						"description": "# **NOTE**\n\n**Only ADMIN is allowed.**\n\n**Required user to login** to get all assets.\n\nGet token by logging into system and put it in **Authorization** header"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"categories"
+							]
+						},
+						"description": "# **NOTE**\n\n**Only ADMIN is allowed**\n\n**Required user to login** to view category list.\n\nGet token by logging into system and put it in **Authorization** header"
+					},
+					"response": []
+				},
+				{
+					"name": "Get asset by code",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/assets/:code",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"assets",
+								":code"
+							],
+							"variable": [
+								{
+									"key": "code",
+									"value": "MO000001"
+								}
+							]
+						},
+						"description": "# **NOTE**\n\n**Only ADMIN is allowed**\n\n**Required user to login** to get asset by its code.\n\nGet token by logging into system and put it in **Authorization** header"
+					},
+					"response": []
+				},
+				{
+					"name": "Create asset",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Personal Computer\",\r\n    \"category\": {\r\n      \"id\": \"LA\",\r\n      \"name\": \"Laptop\"\r\n    },\r\n    \"specification\": \"Core i5, 8GB RAM, 750 GB HDD, Window 8\",\r\n    \"installedDate\": \"2022-11-28\",\r\n    \"state\": \"Available\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/assets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"assets"
+							]
+						},
+						"description": "# NOTE\n\n**Required user to login** to create user.\n\nGet token by logging into system and put it in **Authorization** header"
+					},
+					"response": []
+				},
+				{
+					"name": "Create category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Keyboard1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"categories"
+							]
+						},
+						"description": "# NOTE\n\n**Only ADMIN is allowed**\n\n**Required user to login** to create category.\n\nGet token by logging into system and put it in **Authorization** header"
+					},
+					"response": []
+				},
+				{
+					"name": "Update asset",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\": {\r\n        \"id\": \"LA\",\r\n        \"name\": \"Laptop\"\r\n    },\r\n    \"name\": \"Personal Computer\",\r\n    \"specification\": \"Core i5, 16GB RAM, 750GB HDD, Window 8\",\r\n    \"installedDate\": \"2022-11-28\",\r\n    \"state\": \"Available\",\r\n    \"location\": {\r\n        \"id\": \"HN\",\r\n        \"name\": \"Hanoi\"\r\n    },\r\n    \"createdBy\": \"vangdo\",\r\n    \"createdDate\": \"2022-11-28T20:12:23.966\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/assets/:code",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"assets",
+								":code"
+							],
+							"variable": [
+								{
+									"key": "code",
+									"value": null
+								}
+							]
+						},
+						"description": "# **NOTE**\n\n**Only ADMIN is allowed.**\n\n**Required user to login** to update asset.\n\nGet token by logging into system and put it in **Authorization** header"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete asset",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/assets/:code",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"assets",
+								":code"
+							],
+							"variable": [
+								{
+									"key": "code",
+									"value": null
+								}
+							]
+						},
+						"description": "# **Note**\n\n**Only ADMIN is allowed.**\n\n**Required user to login** to delete asset.\n\nGet token by logging into system and put it in **Authorization** header"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Manage assignment",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Create assignment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkdW9uZ250IiwiaWF0IjoxNjY5Nzk4MTc3LCJleHAiOjE2Njk3OTk5Nzd9.xqh0Tdl112HykTPEjxKTwN-f0w1KqJqKTSw5vuGVZ5unEG816F5YXw3V8BBh7UDDJGccbfpEVwJ5dkv7uAStoQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"assignedTo\": {\r\n        \"username\": \"chi tungnd\",\r\n        \"firstName\": \"chi tung\",\r\n        \"lastName\": \"nguyen duc\",\r\n        \"dob\": \"2000-05-10\",\r\n        \"joinedDate\": \"2022-12-01\",\r\n        \"gender\": \"MALE\",\r\n        \"type\": \"STAFF\",\r\n        \"staffCode\": \"SD0246\",\r\n        \"status\": null,\r\n        \"location\": {\r\n            \"id\": \"1\",\r\n            \"name\": \"Hanoi\"\r\n        },\r\n        \"createdBy\": \"vangdo\",\r\n        \"createdDate\": \"2022-12-01T09:37:25.469\",\r\n        \"lastUpdatedBy\": \"vangdo\",\r\n        \"lastUpdatedDate\": \"2022-12-01T18:27:47.5\"\r\n    },\r\n    \"asset\": {\r\n        \"code\": \"LA000005\",\r\n        \"category\": {\r\n            \"id\": \"LA\",\r\n            \"name\": \"Laptop\"\r\n        },\r\n        \"name\": \"Personal test\",\r\n        \"specification\": \"Core i5, 8GB RAM, 750 GB HDD, Window  10\",\r\n        \"installedDate\": \"2022-12-01\",\r\n        \"state\": \"Available\",\r\n        \"location\": {\r\n            \"id\": \"1\",\r\n            \"name\": \"Hanoi\"\r\n        },\r\n        \"createdBy\": \"vangdo\",\r\n        \"createdDate\": \"2022-11-29T12:07:45.173856\",\r\n        \"lastUpdatedBy\": \"vangdo\",\r\n        \"lastUpdatedDate\": \"2022-12-01T20:41:41.564\",\r\n    },\r\n    \"assignedDate\": \"2022-11-28\",\r\n    \"note\": \"Valuable asset\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/assignments/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"assignments",
+										""
+									]
+								},
+								"description": "# NOTE\n\n**Only ADMIN is allowed.**\n\n**Required user to login** to create assignment.\n\nGet token by logging into system and put it in **Authorization** header"
+							},
+							"response": []
+						},
+						{
+							"name": "Get assignment by id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v1/assignments/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"assignments",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								},
+								"description": "# **NOTE**\n\n**Only ADMIN is allowed**\n\n**Required user to login** to get assignment by its id.\n\nGet token by logging into system and put it in **Authorization** header"
+							},
+							"response": []
+						},
+						{
+							"name": "Update assignment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkdW9uZ250IiwiaWF0IjoxNjY5Nzk4MTc3LCJleHAiOjE2Njk3OTk5Nzd9.xqh0Tdl112HykTPEjxKTwN-f0w1KqJqKTSw5vuGVZ5unEG816F5YXw3V8BBh7UDDJGccbfpEVwJ5dkv7uAStoQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"assignedTo\": {\r\n        \"username\": \"chi tungnd\",\r\n        \"firstName\": \"chi tung\",\r\n        \"lastName\": \"nguyen duc\",\r\n        \"dob\": \"2000-05-10\",\r\n        \"joinedDate\": \"2022-12-01\",\r\n        \"gender\": \"MALE\",\r\n        \"type\": \"STAFF\",\r\n        \"staffCode\": \"SD0246\",\r\n        \"status\": null,\r\n        \"location\": {\r\n            \"id\": \"1\",\r\n            \"name\": \"Hanoi\"\r\n        },\r\n        \"createdBy\": \"vangdo\",\r\n        \"createdDate\": \"2022-12-01T09:37:25.469\",\r\n        \"lastUpdatedBy\": \"vangdo\",\r\n        \"lastUpdatedDate\": \"2022-12-01T18:27:47.5\"\r\n    },\r\n    \"asset\": {\r\n        \"code\": \"LA000005\",\r\n        \"category\": {\r\n            \"id\": \"LA\",\r\n            \"name\": \"Laptop\"\r\n        },\r\n        \"name\": \"Personal test\",\r\n        \"specification\": \"Core i5, 8GB RAM, 750 GB HDD, Window  10\",\r\n        \"installedDate\": \"2022-12-01\",\r\n        \"state\": \"Available\",\r\n        \"location\": {\r\n            \"id\": \"1\",\r\n            \"name\": \"Hanoi\"\r\n        },\r\n        \"createdBy\": \"vangdo\",\r\n        \"createdDate\": \"2022-11-29T12:07:45.173856\",\r\n        \"lastUpdatedBy\": \"vangdo\",\r\n        \"lastUpdatedDate\": \"2022-12-01T20:41:41.564\"\r\n    },\r\n    \"assignedDate\": \"2022-11-28\",\r\n    \"note\": \"Valuable asset\",\r\n    \"createdBy\": \"vangdo\",\r\n    \"createdDate\": \"2022-11-28T20:12:23.966\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/assignments/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"assignments",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								},
+								"description": "# **NOTE**\n\n**Only ADMIN is allowed.**\n\n**Required user to login** to update assignment.\n\nGet token by logging into system and put it in **Authorization** header"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete assignment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkdW9uZ250IiwiaWF0IjoxNjY5Nzk4MTc3LCJleHAiOjE2Njk3OTk5Nzd9.xqh0Tdl112HykTPEjxKTwN-f0w1KqJqKTSw5vuGVZ5unEG816F5YXw3V8BBh7UDDJGccbfpEVwJ5dkv7uAStoQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v1/assignments/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"assignments",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								},
+								"description": "# **Note**\n\n**Only ADMIN is allowed.**\n\n**Required user to login** to delete assignment.\n\nGet token by logging into system and put it in **Authorization** header\n\n---\n\n# DESCRIPTION\n\nThe assignment only change the state to **Declined**, not remove from db"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Respond assignment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkdW9uZ250IiwiaWF0IjoxNjY5Nzk4MTc3LCJleHAiOjE2Njk3OTk5Nzd9.xqh0Tdl112HykTPEjxKTwN-f0w1KqJqKTSw5vuGVZ5unEG816F5YXw3V8BBh7UDDJGccbfpEVwJ5dkv7uAStoQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"state\": \"Accepted\" // or \"Declined\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/assignments/:id/respond",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"assignments",
+										":id",
+										"respond"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								},
+								"description": "# **Note**\n\n**Only STAFF is allowed.**\n\n**Required user to login** to respond to assignment.\n\nGet token by logging into system and put it in **Authorization** header\n\n---\n\n# DESCRIPTION\n\nStaff can respond by sending \"Accepted\" or \"Declined\" state to BE"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get list of assignments with given filter",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/assignments?page=&search=&sort=&state=&assignedDate=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"assignments"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "",
+									"description": "0"
+								},
+								{
+									"key": "search",
+									"value": ""
+								},
+								{
+									"key": "sort",
+									"value": ""
+								},
+								{
+									"key": "state",
+									"value": ""
+								},
+								{
+									"key": "assignedDate",
+									"value": "",
+									"description": "date with format yyyy-mm-dd"
+								},
+								{
+									"key": "sort",
+									"value": "",
+									"description": "assignedDate,asc",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "",
+									"description": "state,desc",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "",
+									"description": "id,asc",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "",
+									"description": "asset.code,desc",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "",
+									"description": "asset.name,asc",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "",
+									"description": "assignedTo.username,asc",
+									"disabled": true
+								}
+							]
+						},
+						"description": "# **NOTE**\n\n**Required user to login** to view assignment list.\n\nGet token by logging into system and put it in **Authorization** header\n\n---\n\n# DESCRIPTION\n\nGet list of users with given params:\n\n- **page**: page index\n- **search**: keywords that matches asset code (code), asset name (name) or assignee's username (assignedTo's username)\n- **sort**: all column titles by ascending/descending. We can sort multiple field using multiple sort parameters.\n    \n\nParams for ADMIN only:\n\n- **assignedDate**: filter by assigned date\n- **state**: filter by 3 states - Accepted, Waiting for acceptance, Declined"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Manage returning request",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Get list of view request for returning with given filter",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v1/returning-requests?page=&search=&state=&returnedDate=",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"returning-requests"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "",
+											"description": "0"
+										},
+										{
+											"key": "search",
+											"value": ""
+										},
+										{
+											"key": "state",
+											"value": ""
+										},
+										{
+											"key": "returnedDate",
+											"value": ""
+										},
+										{
+											"key": "sort",
+											"value": "",
+											"description": "asset.name,desc",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "",
+											"description": "id.asc",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "",
+											"description": "requestedBy.username,desc",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "",
+											"description": "acceptedBy.username,desc",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "",
+											"description": "assignedDate,asc",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "",
+											"description": "returnedDate,desc",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "",
+											"description": "state,asc",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "asset.code,asc",
+											"description": "asset.code,asc",
+											"disabled": true
+										}
+									]
+								},
+								"description": "# **NOTE**\n\n**Only ADMIN is allowed.**\n\n**Required user to login** to view returning request list.\n\nGet token by logging into system and put it in **Authorization** header\n\n---\n\n# DESCRIPTION\n\nGet list of users with given params:\n\n- **page**: page index\n- **search**: keywords that matches asset code (code), asset name (name) or assignee's username (assignedTo's username)\n- **sort**: all column titles by ascending/descending. We can sort multiple field using multiple sort parameters.\n- **returnedDate**: filter by returned date\n- **state**: filter by 2 states - Completed and Waiting for returning"
+							},
+							"response": []
+						},
+						{
+							"name": "Get returning request by id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v1/returning-requests/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"returning-requests",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								},
+								"description": "# **NOTE**\n\n**Only ADMIN is allowed**\n\n**Required user to login** to get returning request by its id.\n\nGet token by logging into system and put it in **Authorization** header"
+							},
+							"response": []
+						},
+						{
+							"name": "Complete returning request",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v1/returning-requests/:id/complete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"returning-requests",
+										":id",
+										"complete"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								},
+								"description": "# **Note**\n\n**Only ADMIN is allowed.**\n\n**Required user to login** to accept the returning request.\n\nGet token by logging into system and put it in **Authorization** header"
+							},
+							"response": []
+						},
+						{
+							"name": "Cancel returning request",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v1/returning-requests/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"returning-requests",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								},
+								"description": "# **Note**\n\n**Only ADMIN is allowed.**\n\n**Required user to login** to cancel the returning request.\n\nGet token by logging into system and put it in **Authorization** header\n\nAfter being canceled, the request will be removed from db"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create Request for Returning",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkdW9uZ250IiwiaWF0IjoxNjY5Nzk4MTc3LCJleHAiOjE2Njk3OTk5Nzd9.xqh0Tdl112HykTPEjxKTwN-f0w1KqJqKTSw5vuGVZ5unEG816F5YXw3V8BBh7UDDJGccbfpEVwJ5dkv7uAStoQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"assignedBy\": {\r\n        \"username\": \"vangdo\",\r\n        \"firstName\": \"Vang\",\r\n        \"lastName\": \"Do\",\r\n        \"dob\": \"2022-11-17\",\r\n        \"joinedDate\": \"2022-11-17\",\r\n        \"gender\": \"MALE\",\r\n        \"type\": \"ADMIN\",\r\n        \"staffCode\": \"SD0009\",\r\n        \"status\": true,\r\n        \"location\": {\r\n            \"id\": \"1\",\r\n            \"name\": \"Hanoi\"\r\n        },\r\n        \"createdBy\": \"vangdo\",\r\n        \"createdDate\": \"2022-11-23T20:12:23.966\",\r\n        \"lastUpdatedBy\": \"vangdo\",\r\n        \"lastUpdatedDate\": \"2022-12-03T11:31:42.85\"\r\n    },\r\n    \"assignedTo\": {\r\n        \"username\": \"duongnt2\",\r\n        \"firstName\": \"Duong\",\r\n        \"lastName\": \"Nguyen Thuy\",\r\n        \"dob\": \"2003-05-14\",\r\n        \"joinedDate\": \"2022-11-29\",\r\n        \"gender\": \"MALE\",\r\n        \"type\": \"STAFF\",\r\n        \"staffCode\": \"SD0107\",\r\n        \"status\": null,\r\n        \"location\": {\r\n            \"id\": \"1\",\r\n            \"name\": \"Hanoi\"\r\n        },\r\n        \"createdBy\": \"vangdo\",\r\n        \"createdDate\": \"2022-11-29T19:16:35.65\",\r\n        \"lastUpdatedBy\": null,\r\n        \"lastUpdatedDate\": null\r\n    },\r\n    \"asset\": {\r\n        \"code\": \"LA000001\",\r\n        \"category\": {\r\n            \"id\": \"LA\",\r\n            \"name\": \"Laptop\"\r\n        },\r\n        \"name\": \"Hello Computer\",\r\n        \"specification\": \"Core i7, 16GB RAM, 750GB HDD, Window 10\",\r\n        \"installedDate\": \"2022-11-30\",\r\n        \"state\": \"Waiting for recycling\",\r\n        \"location\": {\r\n            \"id\": \"1\",\r\n            \"name\": \"Hanoi\"\r\n        },\r\n        \"createdBy\": \"vangdo\",\r\n        \"createdDate\": \"2022-11-28T20:12:23.966\",\r\n        \"lastUpdatedBy\": \"vangdo\",\r\n        \"lastUpdatedDate\": \"2022-12-01T17:14:40.895\"\r\n    },\r\n    \"assignedDate\": \"2022-12-13\",\r\n    \"state\": \"Accepted\",\r\n    \"createdBy\": \"vangdo\",\r\n    \"createdDate\": \"2022-11-28T18:32:00.478886\",\r\n    \"lastUpdatedBy\": \"vangdo\",\r\n    \"lastUpdatedDate\": \"2022-11-28T18:32:00.478886\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/returning-requests/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"returning-requests",
+								""
+							]
+						},
+						"description": "# NOTE\n\n**Only ADMIN is allowed.**\n\n**Required user to login** to create returning request.\n\nGet token by logging into system and put it in **Authorization** header\n\nThe request body only need to send the assignment which will be used to create retuning request."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
